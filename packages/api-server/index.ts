@@ -1,11 +1,11 @@
 import express from "express";
-// import * as trpc from "@trpc/server"
-const { createRouter } = require('@trpc/server');
+import * as trpc from "@trpc/server"
+// import { createRouter } from '@trpc/server';
 import * as trpcExpress from "@trpc/server/adapters/express"
 
 
 // Creating our router ; our endpoint to handle incoming request from the client
-const appRouter = createRouter.query("Hello", {
+const appRouter = trpc.router().query("Hello", {
   resolve(){
     return "Hello world"
   }
