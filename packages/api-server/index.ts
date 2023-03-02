@@ -1,10 +1,11 @@
 import express from "express";
-import * as trpc from "@trpc/server"
+// import * as trpc from "@trpc/server"
+const { createRouter } = require('@trpc/server');
 import * as trpcExpress from "@trpc/server/adapters/express"
 
 
-// Creating our router ; here we are creating a query route because we want to send(query) data to the client
-const appRouter = trpc.router().query("Hello", {
+// Creating our router ; our endpoint to handle incoming request from the client
+const appRouter = createRouter.query("Hello", {
   resolve(){
     return "Hello world"
   }
@@ -21,6 +22,7 @@ const app = express();
 app.use("/trpc", 
 trpcExpress.createExpressMiddleware({
   router : appRouter,
+  // Context is used when you are dealing with somethings like authorizatio, 
   createContext
 }))
 
